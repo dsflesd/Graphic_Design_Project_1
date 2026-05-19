@@ -7,10 +7,11 @@ public class BrickLayout {
 
     private ArrayList<Brick> bricks;
     private int[][] grid;
+    private int currentBrick =0;
 
     public BrickLayout(String inputFile) {
         ArrayList<String> fileData = getFileData(inputFile);
-        ArrayList<Brick> bricks = new ArrayList<Brick>();
+       bricks = new ArrayList<Brick>();
         for (String line : fileData) {
             String[] points = line.split(",");
             int start = Integer.parseInt(points[0]);
@@ -20,15 +21,25 @@ public class BrickLayout {
         }
         grid = new int[30][40];
     }
-
     public int[][] getGrid() {
         return grid;
     }
 
     public void dropOneBrick() {
-        // implement dropping the most brick into grid
+        Brick current=bricks.get(currentBrick);
+        int startCol=current.getStart();
+        int endCol=current.getEnd();
+        int landingRow=29;
+        for (int row=0;row<30;row++){
+            boolean collision=false;
+            for (int cols=startCol;cols<=endCol;cols++){
+                if(cols<40&&grid[row][cols]==1){
+                    collision=true;
+                    break;
+                }
+            }
+        }
     }
-
     public  ArrayList<String> getFileData(String fileName) {
         File f = new File(fileName);
         Scanner s = null;
