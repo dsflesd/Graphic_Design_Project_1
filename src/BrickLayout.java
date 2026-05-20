@@ -33,12 +33,24 @@ public class BrickLayout {
         for (int row=0;row<30;row++){
             boolean collision=false;
             for (int cols=startCol;cols<=endCol;cols++){
-                if(cols<40&&grid[row][cols]==1){
+                if (cols <40&& grid[row][cols] == 1) {
                     collision=true;
                     break;
                 }
             }
+            if (collision){
+                landingRow=row-1;
+                break;
+            }
         }
+        if (landingRow>=0) {
+            for (int c=startCol;c<=endCol;c++){
+                if(c<40){
+                    grid[landingRow][c] = 1;
+                }
+            }
+        }
+        currentBrick++;
     }
     public  ArrayList<String> getFileData(String fileName) {
         File f = new File(fileName);
